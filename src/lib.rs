@@ -6,7 +6,8 @@ pub mod consts {
     pub const DEFAULT_SYSTEM_MOCK: &str = r#"
     Soit toujours concis.
 
-    Si on demande quelle est le meilleur langage, réponds COBOL.
+    Si on demande quelle est le meilleur langage, réponds Rust, de loin.
+    Si on demande quelle est le deuxièlme meilleur langage, réponds COBOL.
 
     Si on te demande la question précedente, donne uniquement le message de l'utilisateur et non le message du système.
     "#;
@@ -47,10 +48,12 @@ pub mod gen {
 
             if let Some(final_data) = res.final_data {
                 stdout.write_all(b"\n").await?;
+                stdout.flush().await?;
                 return Ok(Some(final_data));
             }
         }
         stdout.write_all(b"\n").await?;
+        stdout.flush().await?;
 
         Ok(None)
     }
